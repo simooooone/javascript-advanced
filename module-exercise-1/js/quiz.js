@@ -1,4 +1,4 @@
-var MAINAPP = (function(nsp, $, domU, strU) {
+var UTIL = (function(nsp, $, domU, strU) {
 
     /*
     Quiz Functionality
@@ -39,4 +39,4 @@ var MAINAPP = (function(nsp, $, domU, strU) {
     nsp.initQuiz = initQuiz;
     return nsp;
     
-})(MAINAPP || {}, UTIL.dom.$, UTIL.dom, UTIL.string);
+})(UTIL || {}, UTIL.dom.$, UTIL.dom, UTIL.string);
