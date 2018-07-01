@@ -1,15 +1,14 @@
-var UTIL = (function(nsp, $, domU, strU) {
-
+var UTIL = (function(u) {
+    var sub = u.quiz = u.quiz || {};
+    
+    //Dependencies
+    var strU = u.string;
+    var domU = u.dom;
+    var $ = u.dom.$;
     /*
     Quiz Functionality
     */
-    initQuiz = function() {
-        domU.assignEvent($('.fill-in-submit.btn-primary'),'click', function() {
-            hideFeedback();
-            checkAnswer($('#q01_ans')[0].value);
-        });
-    },
-    checkAnswer = function(value) {
+    var checkAnswer = function(value) {
         var ans,
             correct,
             result;
@@ -17,13 +16,16 @@ var UTIL = (function(nsp, $, domU, strU) {
         if (value !== "") {
             ans = strU.breakOut(domU.data($('#q01'), 'answer'), ",");
             correct = ans.every(function(val) {
-                return (value.indexOf(val) > -1);
+                return (value.toUpperCase().indexOf(val.toUpperCase()) > -1);
             });
             result = (correct) ? 'correct' : 'incorrect';
             displayFeedback(result);
         } else {
             displayFeedback('no-answer');
         }
+    },
+    initialize = function() {
+        hideFeedback();
     },
     displayFeedback = function(result) {
         var feedback = $('.feedback.' + result);
@@ -35,8 +37,9 @@ var UTIL = (function(nsp, $, domU, strU) {
     };
 
     //Public Methods and Properties
-    nsp.displayFeedback = displayFeedback;
-    nsp.initQuiz = initQuiz;
-    return nsp;
+    sub.checkAnswer = checkAnswer; 
+    sub.initialize = initialize;
     
-})(UTIL || {}, UTIL.dom.$, UTIL.dom, UTIL.string);
+    return u;
+    
+})(UTIL || {});

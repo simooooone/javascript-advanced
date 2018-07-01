@@ -1,9 +1,18 @@
-var MAINAPP = (function() {
+var MAINAPP = (function(nsp, $, domU, strU) {
+
+    var q = UTIL.quiz;
+    var initQuiz = function() {
+        domU.assignEvent($('.fill-in-submit.btn-primary'),'click', function() {
+            q.initialize();
+            q.checkAnswer($('#q01_ans')[0].value);
+        });
+    };
+
     /*
     Setup
     */
     UTIL.domReady(function() {
-        UTIL.initQuiz();
+        initQuiz();
     });
     
-})(MAINAPP || {});
+})(MAINAPP || {}, UTIL.dom.$, UTIL.dom, UTIL.string);
