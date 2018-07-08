@@ -5,12 +5,13 @@
 var MAINAPP = (function(params, util) {
     
     util.dom.domReady(function() {
-        util.json.loadJSON();
-        util.dom.$('h2').innerHTML(util.json.jsonObj.app.heading);
-        for (let i = 0; i < util.dom.$('li').length; i++) {
-            let itemContent = util.dom.$('#b' + i);
-            itemContent.innerHTML(util.json.jsonObj.app.items[i]);
-        }
+        util.json.loadJSON('data/data.json',  function() {
+            util.dom.$('h2')[0].innerHTML = util.json.jsonObj.app.heading;
+            for (let i = 0; i < util.dom.$('li').length; i++) {
+                let itemContent = util.dom.$('#b' + (i+1));
+                itemContent.innerHTML = util.json.jsonObj.app.items[i];
+            }
+        });
     });
 
     return params;

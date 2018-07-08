@@ -4,16 +4,18 @@ var UTIL = (function(params) {
 
     var jsonObj = {};
 
-    var loadJSON = function(path) {
+    var loadJSON = function(path, code) {
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType('application/json');
         xobj.open('GET', path);
         xobj.onreadystatechange = function() {
             if (xobj.readyState === 4) {
-                jsonObj = JSON.parse(xobj.responseText);
+                sub.jsonObj = JSON.parse(xobj.responseText);
+                code();
             }
         };
         xobj.send(null);
+
     };
 
     sub.jsonObj = jsonObj;

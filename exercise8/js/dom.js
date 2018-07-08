@@ -4,7 +4,7 @@ var UTIL = (function(params) {
     var $ = function (domElement) {
         if (domElement.indexOf('#') === 0){
             try {
-                return doc.getElementsById(domElement.substring(1,domElement.length));
+                return doc.getElementById(domElement.substring(1,domElement.length));
             } catch(e) {
                 console.log(e);
             }
